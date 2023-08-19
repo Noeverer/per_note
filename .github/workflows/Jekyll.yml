@@ -12,4 +12,5 @@ jobs:
           GITHUB_TOKEN: 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
           GITHUB_REPOSITORY: Noeverer/per_note
           GITHUB_ACTOR: Noeverer
-        uses: Noeverer/Jekyll@master
+        uses: github-pages-deploy-action@master
+
