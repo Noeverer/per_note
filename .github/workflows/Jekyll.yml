@@ -1,0 +1,15 @@
+name: Jekyll Deploy
+
+on: [push]
+
+jobs: 
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build & Deploy to GitHub Pages
+        env: 
+          GITHUB_TOKEN: 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
+          GITHUB_REPOSITORY: Noeverer/per_note
+          GITHUB_ACTOR: Noeverer
+        uses: Noeverer/Jekyll@master
