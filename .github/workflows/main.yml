@@ -8,28 +8,45 @@ on:
 
 # 任务
 jobs:
-  build-and-deploy:
-    # 服务器环境：最新版 Ubuntu
-    runs-on: ubuntu-latest
+  blog-cicd:
+    name: Hexo blog build & deploy
+    runs-on: ubuntu-latest # 使用最新的 Ubuntu 系统作为编译部署的环境
+
     steps:
-      # 拉取代码
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-      - name: npm install, build and test
-      # 1、生成静态文件
-        run: |
-          npm install
-          npm run build --if-present
-          npm test
+    - name: Checkout codes
+      uses: actions/checkout@v2
+
+    - name: Setup node
+      # 设置 node.js 环境
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Cache node modules
+      # 设置包缓存目录，避免每次下载
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+    - name: Install hexo dependencies
+      # 下载 hexo-cli 脚手架及相关安装包
+      run: |
+        npm install -g hexo-cli
+        npm install
+
+    - name: Generate files
+      # 编译 markdown 文件
+      run: |
+        hexo clean
+        hexo generate
 
       # 2、部署到 GitHub Pages
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          ACCESS_TOKEN: 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
-          REPOSITORY_NAME: Noeverer/Noeverer.github.io
-          BRANCH: master
-          FOLDER: public
-          #注意这里的 public 是仓库根目录下的 public，也就是 npm run build 生成静态资源的路径，比如有的人是 `docs/.vuepress/dist`
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: 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
+        REPOSITORY_NAME: pro_note/Noeverer.github.io
+        BRANCH: master
+        FOLDER: public
+        #注意这里的 public 是仓库根目录下的 public，也就是 npm run build 生成静态资源的路径，比如有的人是 `docs/.vuepress/dist`
