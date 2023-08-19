@@ -46,7 +46,7 @@ jobs:
     - name: Deploy hexo blog
       env: 
         # Github 仓库
-        GITHUB_REPO: github.com/Noeverer/Noeverer.github.io
+        GITHUB_REPO: git@github.com:Noeverer/per_note.git
         # Coding 仓库
         # CODING_REPO: e.coding.net/Noeverer/blogs.git
         # Gitee 仓库
@@ -58,6 +58,6 @@ jobs:
         git config user.email "robotliu0327@gmail.com"
         git add .
         git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
-        git push --force --quiet "https://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@$GITHUB_REPO" master:master
+        git push --force --quiet "https://github.com/Noeverer/per_note.git" master:master
         # git push --force --quiet "https://RoYFbFDSfM:${{ secrets.CODING_TOKEN }}@$CODING_REPO" master:master
         # git push --force --quiet "https://yifanzheng:${{ secrets.GITEE_ACCESS_TOKEN }}@$GITEE_REPO" master:master
