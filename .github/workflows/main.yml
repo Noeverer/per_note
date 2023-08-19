@@ -43,7 +43,7 @@ jobs:
 
       # 2、部署到 GitHub Pages
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+      uses: Noeverer/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: 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
         REPOSITORY_NAME: pro_note/Noeverer.github.io
